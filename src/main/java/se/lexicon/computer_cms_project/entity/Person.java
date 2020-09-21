@@ -12,7 +12,7 @@ public class Person {
     private Boolean active;
 
     //Constructor 1
-    public Person(Integer id, String firstName, String lastName, LocationInformation locationInformation, ContactInformation contactInformation, Boolean active) {
+    public Person(int id, String firstName, String lastName, LocationInformation locationInformation, ContactInformation contactInformation, Boolean active) {
         this.id = id;
         this.setFirstName(firstName);
         this.setLastName(lastName);
@@ -30,7 +30,7 @@ public class Person {
     public Person() {}
 
     //Getters & Setters
-    public Integer getId() { return id; }
+    public int getId() { return id; }
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public String getLastName() { return lastName; }

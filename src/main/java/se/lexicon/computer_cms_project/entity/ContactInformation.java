@@ -1,10 +1,15 @@
 package se.lexicon.computer_cms_project.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class ContactInformation {
     //Fields
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true)
     private String email;
     private String phoneNr;
 
