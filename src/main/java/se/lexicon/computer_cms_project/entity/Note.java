@@ -1,10 +1,15 @@
 package se.lexicon.computer_cms_project.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Note {
     //Fields
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true)
     private String noteTitle;
     private String noteFreeText;
 
@@ -28,7 +33,6 @@ public class Note {
     public Note() {}
 
     //Equals & Hashcode Overrides
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,10 +48,7 @@ public class Note {
         return Objects.hash(id, noteTitle, noteFreeText);
     }
 
-
     //toString Override
-
-
     @Override
     public String toString() {
         return "Note{" +

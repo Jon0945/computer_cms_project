@@ -3,6 +3,7 @@ package se.lexicon.computer_cms_project.entity;
 import java.util.Objects;
 
 public class LocationInformation {
+    //Fields
     private int id;
     private String streetName;
     private String postalCode;

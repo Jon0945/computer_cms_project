@@ -7,10 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class PersonTest {
-    private Person testPerson;
-    private String testFirstName = "Ture";
-    private String testLastName = "Test";
+public class CompanyTest {
+    private Company testCompany;
+    private String testCompanyName = "Test AB";
     private LocationInformation testLocationInformation;
     private String testStreetName = "Hjalmar Petris Väg 32";
     private String testPostalCode = "352 46";
@@ -25,22 +24,21 @@ class PersonTest {
     public void createComputerWhereAbout() {
         testLocationInformation = new LocationInformation(testStreetName, testPostalCode, testCityName, testCountryName);
         testContactInformation = new ContactInformation(testEmail, testPhoneNr);
-        testPerson = new Person(testFirstName, testLastName, testLocationInformation, testContactInformation, testActiveStatus);
+        testCompany = new Company(testCompanyName, testLocationInformation, testContactInformation, testActiveStatus);
     }
 
     @AfterEach
     public void endComputerWhereAbout() {
         testLocationInformation = null;
         testContactInformation = null;
-        testPerson = null;
+        testCompany = null;
     }
 
     @Test
     public void testBeforeWorks()
     {
         //Arrange
-        String expectedFirstName = testFirstName;
-        String expectedLastName = testLastName;
+        String expectedCompanyName = testCompanyName;
         LocationInformation expectedLocationInformation = testLocationInformation;
         ContactInformation expectedContactInformation = testContactInformation;
         Boolean expectedActiveStatus = testActiveStatus;
@@ -49,37 +47,34 @@ class PersonTest {
         // done by @BeforeEach
 
         //Assert
-        assertTrue(testPerson.getId() > -1);
-        assertEquals(expectedFirstName, testPerson.getFirstName());
-        assertEquals(expectedLastName, testPerson.getLastName());
-        assertEquals(expectedLocationInformation, testPerson.getLocationInformation());
-        assertEquals(expectedContactInformation, testPerson.getContactInformation());
-        assertEquals(expectedActiveStatus,testPerson.getActive());
+        assertTrue(testCompany.getId() > -1);
+        assertEquals(expectedCompanyName, testCompany.getCompanyName());
+        assertEquals(expectedLocationInformation, testCompany.getLocationInformation());
+        assertEquals(expectedContactInformation, testCompany.getContactInformation());
+        assertEquals(expectedActiveStatus,testCompany.getActive());
     }
 
     @Test
     public void testEqualsAndHashCode() {
         //Arrange
-        Person alternatePerson = new Person(testFirstName,testLastName,testLocationInformation,
-                testContactInformation,true);
+        Company alternateCompany = new Company(testCompanyName,testLocationInformation,
+                testContactInformation,testActiveStatus);
 
         //Assert
-        assertEquals(alternatePerson, testPerson);
-        assertEquals(alternatePerson.hashCode(),testPerson.hashCode());
+        assertEquals(alternateCompany, testCompany);
+        assertEquals(alternateCompany.hashCode(),testCompany.hashCode());
     }
 
     @Test
     public void testToString() {
 
         //Act
-        String result = testPerson.toString();
+        String result = testCompany.toString();
 
         //Assert
-        assertTrue(result.contains(testFirstName));
-        assertTrue(result.contains(testLastName));
-        assertTrue(result.contains(String.valueOf(testPerson.getLocationInformation())));
-        assertTrue(result.contains(String.valueOf(testPerson.getContactInformation())));
+        assertTrue(result.contains(testCompanyName));
+        assertTrue(result.contains(String.valueOf(testCompany.getLocationInformation())));
+        assertTrue(result.contains(String.valueOf(testCompany.getContactInformation())));
+        assertTrue(result.contains((String.valueOf(testCompany.getActive()))));
     }
-
-
 }
