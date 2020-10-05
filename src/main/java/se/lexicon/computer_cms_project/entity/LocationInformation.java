@@ -1,17 +1,24 @@
 package se.lexicon.computer_cms_project.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class LocationInformation {
     //Fields
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int locationInformationId;
     private String streetName;
     private String postalCode;
     private String cityName;
     private String countryName;
 
     //Getters & Setters
-    public int getId() { return id; }
+    public int getId() { return locationInformationId; }
     public String getStreetName() { return streetName; }
     public void setStreetName(String streetName) { this.streetName = streetName; }
     public String getPostalCode() { return postalCode; }
@@ -23,7 +30,7 @@ public class LocationInformation {
 
     //Constructor 1
     public LocationInformation(int id, String streetName, String postalCode, String cityName, String countryName) {
-        this.id = id;
+        this.locationInformationId = id;
         this.setStreetName(streetName);
         this.setPostalCode(postalCode);
         this.setCityName(cityName);
@@ -44,7 +51,7 @@ public class LocationInformation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LocationInformation that = (LocationInformation) o;
-        return id == that.id &&
+        return locationInformationId == that.locationInformationId &&
                 streetName.equals(that.streetName) &&
                 postalCode.equals(that.postalCode) &&
                 cityName.equals(that.cityName) &&
@@ -53,14 +60,14 @@ public class LocationInformation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, streetName, postalCode, cityName, countryName);
+        return Objects.hash(locationInformationId, streetName, postalCode, cityName, countryName);
     }
 
     //toString Override
     @Override
     public String toString() {
         return "LocationInformation{" +
-                "id=" + id +
+                "id=" + locationInformationId +
                 ", streetName='" + streetName + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 ", cityName='" + cityName + '\'' +

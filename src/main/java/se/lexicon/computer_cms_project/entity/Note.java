@@ -8,21 +8,20 @@ public class Note {
     //Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(unique = true)
+    private int noteId;
     private String noteTitle;
     private String noteFreeText;
 
     //Getters & Setters
-    public int getId() { return id; }
+    public int getId() { return noteId; }
     public String getNoteTitle() { return noteTitle; }
     public void setNoteTitle(String noteTitle) { this.noteTitle = noteTitle; }
     public String getNoteFreeText() { return noteFreeText; }
     public void setNoteFreeText(String noteFreeText) { this.noteFreeText = noteFreeText; }
 
     //Constructor 1
-    public Note(int id, String noteTitle, String noteFreeText) {
-        this.id = id;
+    public Note(int noteId, String noteTitle, String noteFreeText) {
+        this.noteId = noteId;
         this.setNoteTitle(noteTitle);
         this.setNoteFreeText(noteFreeText);
     }
@@ -38,21 +37,21 @@ public class Note {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Note note = (Note) o;
-        return id == note.id &&
+        return noteId == note.noteId &&
                 noteTitle.equals(note.noteTitle) &&
                 noteFreeText.equals(note.noteFreeText);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, noteTitle, noteFreeText);
+        return Objects.hash(noteId, noteTitle, noteFreeText);
     }
 
     //toString Override
     @Override
     public String toString() {
         return "Note{" +
-                "id=" + id +
+                "id=" + noteId +
                 ", noteTitle='" + noteTitle + '\'' +
                 ", noteFreeText='" + noteFreeText + '\'' +
                 '}';

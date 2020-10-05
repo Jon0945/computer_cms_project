@@ -1,13 +1,18 @@
 package se.lexicon.computer_cms_project.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
+
 
 public class Computer {
     //Fields
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int computerId;
     private String brand;
     private String model;
     private String osSerialKey;
+    @Column(unique = true)
     private String serialNumber;
     private String cpuSpeed;
     private String gpuCard;
@@ -26,7 +31,7 @@ public class Computer {
                     String ramSize, String hddSize, String screenResolution,
                     String supportNote, String otherNotes, boolean activeStatus,
                     ComputerWhereabout computerWhereabout) {
-        this.id = id;
+        this.computerId = id;
         this.setBrand(brand);
         this.setModel(model);
         this.setOsSerialKey(osSerialKey);
@@ -55,7 +60,7 @@ public class Computer {
 
 
     //Getters & Setters
-    public int getId() { return id; }
+    public int getId() { return computerId; }
     public String getBrand() { return brand; }
     public void setBrand(String brand) { this.brand = brand; }
     public String getModel() { return model; }
@@ -89,7 +94,7 @@ public class Computer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Computer computer = (Computer) o;
-        return id == computer.id &&
+        return computerId == computer.computerId &&
                 activeStatus == computer.activeStatus &&
                 brand.equals(computer.brand) &&
                 model.equals(computer.model) &&
@@ -107,7 +112,7 @@ public class Computer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brand, model, osSerialKey, serialNumber, cpuSpeed, gpuCard, ramSize,
+        return Objects.hash(computerId, brand, model, osSerialKey, serialNumber, cpuSpeed, gpuCard, ramSize,
                 hddSize, screenResolution, supportNote, otherNotes, activeStatus, computerWhereabout);
     }
 
@@ -116,7 +121,7 @@ public class Computer {
     @Override
     public String toString() {
         return "Computer{" +
-                "id=" + id +
+                "id=" + computerId +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", osSerialKey='" + osSerialKey + '\'' +

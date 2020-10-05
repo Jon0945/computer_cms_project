@@ -1,10 +1,14 @@
 package se.lexicon.computer_cms_project.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
+
 
 public class Person {
     //Fields
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int personId;
     private String firstName;
     private String lastName;
     private LocationInformation locationInformation;
@@ -12,8 +16,8 @@ public class Person {
     private Boolean active;
 
     //Constructor 1
-    public Person(int id, String firstName, String lastName, LocationInformation locationInformation, ContactInformation contactInformation, Boolean active) {
-        this.id = id;
+    public Person(int personId, String firstName, String lastName, LocationInformation locationInformation, ContactInformation contactInformation, Boolean active) {
+        this.personId = personId;
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setLocationInformation(locationInformation);
@@ -30,7 +34,7 @@ public class Person {
     public Person() {}
 
     //Getters & Setters
-    public int getId() { return id; }
+    public int getId() { return personId; }
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public String getLastName() { return lastName; }
@@ -48,7 +52,7 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return id == person.id &&
+        return personId == person.personId &&
                 firstName.equals(person.firstName) &&
                 lastName.equals(person.lastName) &&
                 locationInformation.equals(person.locationInformation) &&
@@ -58,14 +62,14 @@ public class Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, locationInformation, contactInformation, active);
+        return Objects.hash(personId, firstName, lastName, locationInformation, contactInformation, active);
     }
 
     //toString Override
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id=" + personId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", locationInformation=" + locationInformation +

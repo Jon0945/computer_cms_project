@@ -1,4 +1,4 @@
-package se.lexicon.computer_cms_project.data;
+package se.lexicon.computer_cms_project.data_access;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,9 +12,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class ContactInformationRepositoryTest {
+public class ContactInformationDAOTest {
     @Autowired
-    ContactInformationRepository contactInformationRepository;
+    ContactInformationDAO contactInformationDAO;
 
     @Autowired
     TestEntityManager entityManager;
@@ -30,13 +30,13 @@ public class ContactInformationRepositoryTest {
 
     @Test
     void given_valid_email_findByEmail_return_ContactInformation() {
-        Optional<ContactInformation> matchingUser = contactInformationRepository.findByEmailIgnoreCase("ture.test@gmail.com");
+        Optional<ContactInformation> matchingUser = contactInformationDAO.findByEmailIgnoreCase("ture.test@gmail.com");
         assertTrue(matchingUser.isPresent());
     }
 
     @Test
     void given_valid_phoneNr_findByPhoneNr_return_ContactInformation() {
-        Optional<ContactInformation> matchingUser = contactInformationRepository.findByPhoneNrIgnoreCase("555 - TEST");
+        Optional<ContactInformation> matchingUser = contactInformationDAO.findByPhoneNrIgnoreCase("555 - TEST");
         assertTrue(matchingUser.isPresent());
     }
 

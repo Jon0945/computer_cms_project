@@ -3,18 +3,22 @@ package se.lexicon.computer_cms_project.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
+
 public class Company {
     //Fields
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int companyId;
+    @Column(unique = true)
     private String companyName;
     private LocationInformation locationInformation;
     private ContactInformation contactInformation;
     private Boolean active;
 
     //Constructor 1
-    public Company(int id, String companyName, LocationInformation locationInformation,
+    public Company(int companyId, String companyName, LocationInformation locationInformation,
                    ContactInformation contactInformation, Boolean active) {
-        this.id = id;
+        this.companyId = companyId;
         this.setCompanyName(companyName);
         this.setLocationInformation(locationInformation);
         this.setContactInformation(contactInformation);
@@ -32,7 +36,7 @@ public class Company {
     }
 
     //Getters & Setters
-    public int getId() { return id; }
+    public int getId() { return companyId; }
     public String getCompanyName() { return companyName; }
     public void setCompanyName(String companyName) { this.companyName = companyName; }
     public LocationInformation getLocationInformation() { return locationInformation; }
@@ -63,7 +67,7 @@ public class Company {
     @Override
     public String toString() {
         return "Company{" +
-                "id=" + id +
+                "id=" + companyId +
                 ", companyName='" + companyName + '\'' +
                 ", locationInformation=" + locationInformation +
                 ", contactInformation=" + contactInformation +

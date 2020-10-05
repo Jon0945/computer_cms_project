@@ -8,14 +8,14 @@ public class ContactInformation {
     //Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int contactInformationId;
     @Column(unique = true)
     private String email;
     private String phoneNr;
 
     //Constructor 1
     public ContactInformation(int id, String email, String phoneNr) {
-        this.id = id;
+        this.contactInformationId = id;
         this.setEmail(email);
         this.setPhoneNr(phoneNr);
     }
@@ -26,7 +26,7 @@ public class ContactInformation {
     public ContactInformation() {}
 
     //Getters & Setters
-    public int getId() { return id; }
+    public int getId() { return contactInformationId; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
     public String getPhoneNr() { return phoneNr; }
@@ -38,20 +38,20 @@ public class ContactInformation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactInformation contactInformation = (ContactInformation) o;
-        return id == contactInformation.id &&
+        return contactInformationId == contactInformation.contactInformationId &&
                 email.equals(contactInformation.email) &&
                 phoneNr.equals(contactInformation.phoneNr);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, phoneNr);
+        return Objects.hash(contactInformationId, email, phoneNr);
     }
 
     @Override
     public String toString() {
         return "ContactInformation{" +
-                "id=" + id +
+                "id=" + contactInformationId +
                 ", email='" + email + '\'' +
                 ", phoneNr='" + phoneNr + '\'' +
                 '}';

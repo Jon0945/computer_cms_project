@@ -1,11 +1,16 @@
 package se.lexicon.computer_cms_project.entity;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class ComputerWhereabout {
     //Fields
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int computerWhereAboutId;
     private LocationInformation locationInformation;
     private ContactInformation contactInformation;
     private LocalDate startTime;
@@ -13,7 +18,7 @@ public class ComputerWhereabout {
     private Note note;
 
     //Getters & Setters
-    public int getId() { return id; }
+    public int getId() { return computerWhereAboutId; }
     public LocationInformation getLocationInformation() { return locationInformation; }
     public void setLocationInformation(LocationInformation locationInformation) { this.locationInformation =
             locationInformation; }
@@ -30,7 +35,7 @@ public class ComputerWhereabout {
     //Constructor 1
     public ComputerWhereabout(int id, LocationInformation locationInformation, ContactInformation contactInformation,
                               LocalDate startTime, LocalDate endTime, Note note) {
-        this.id = id;
+        this.computerWhereAboutId = id;
         this.setLocationInformation(locationInformation);
         this.setContactInformation(contactInformation);
         this.setStartTime(startTime);
@@ -53,7 +58,7 @@ public class ComputerWhereabout {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComputerWhereabout that = (ComputerWhereabout) o;
-        return id == that.id &&
+        return computerWhereAboutId == that.computerWhereAboutId &&
                 locationInformation.equals(that.locationInformation) &&
                 contactInformation.equals(that.contactInformation) &&
                 startTime.equals(that.startTime) &&
@@ -63,14 +68,14 @@ public class ComputerWhereabout {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, locationInformation, contactInformation, startTime, endTime, note);
+        return Objects.hash(computerWhereAboutId, locationInformation, contactInformation, startTime, endTime, note);
     }
 
     //toString Override
     @Override
     public String toString() {
         return "ComputerWhereabout{" +
-                "id=" + id +
+                "id=" + computerWhereAboutId +
                 ", locationInformation=" + locationInformation +
                 ", contactInformation=" + contactInformation +
                 ", startTime=" + startTime +
