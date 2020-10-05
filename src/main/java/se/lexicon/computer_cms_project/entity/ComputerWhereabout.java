@@ -1,20 +1,25 @@
 package se.lexicon.computer_cms_project.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
 public class ComputerWhereabout {
     //Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int computerWhereAboutId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "locationInformation_id")
     private LocationInformation locationInformation;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contactInformation_id")
     private ContactInformation contactInformation;
     private LocalDate startTime;
     private LocalDate endTime;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "note_id")
     private Note note;
 
     //Getters & Setters

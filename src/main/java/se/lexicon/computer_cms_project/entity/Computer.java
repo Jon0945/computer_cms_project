@@ -3,7 +3,7 @@ package se.lexicon.computer_cms_project.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
-
+@Entity
 public class Computer {
     //Fields
     @Id
@@ -19,9 +19,15 @@ public class Computer {
     private String ramSize;
     private String hddSize;
     private String screenResolution;
-    private String supportNote;
-    private String otherNotes;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supportnote_id")
+    private Note supportNote;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "othernote_id")
+    private Note otherNotes;
     private boolean activeStatus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "computerwhereabout_id")
     private ComputerWhereabout computerWhereabout;
 
     //Constructor 1
@@ -29,7 +35,7 @@ public class Computer {
                     String brand, String model, String osSerialKey,
                     String serialNumber, String cpuSpeed, String gpuCard,
                     String ramSize, String hddSize, String screenResolution,
-                    String supportNote, String otherNotes, boolean activeStatus,
+                    Note supportNote, Note otherNotes, boolean activeStatus,
                     ComputerWhereabout computerWhereabout) {
         this.computerId = id;
         this.setBrand(brand);
@@ -50,7 +56,7 @@ public class Computer {
     public Computer(String brand, String model, String osSerialKey,
                     String serialNumber, String cpuSpeed, String gpuCard,
                     String ramSize, String hddSize, String screenResolution,
-                    String supportNote, String otherNotes, boolean activeStatus,
+                    Note supportNote, Note otherNotes, boolean activeStatus,
                     ComputerWhereabout computerWhereabout) {
         this(0, brand, model, osSerialKey, serialNumber, cpuSpeed, gpuCard, ramSize, hddSize, screenResolution, supportNote, otherNotes, activeStatus, computerWhereabout);
     }
@@ -79,10 +85,10 @@ public class Computer {
     public void setHddSize(String hddSize) { this.hddSize = hddSize; }
     public String getScreenResolution() { return screenResolution; }
     public void setScreenResolution(String screenResolution) { this.screenResolution = screenResolution; }
-    public String getSupportNote() { return supportNote; }
-    public void setSupportNote(String supportNote) { this.supportNote = supportNote; }
-    public String getOtherNotes() { return otherNotes; }
-    public void setOtherNotes(String otherNotes) { this.otherNotes = otherNotes; }
+    public Note getSupportNote() { return supportNote; }
+    public void setSupportNote(Note supportNote) { this.supportNote = supportNote; }
+    public Note getOtherNotes() { return otherNotes; }
+    public void setOtherNotes(Note otherNotes) { this.otherNotes = otherNotes; }
     public boolean isActiveStatus() { return activeStatus; }
     public void setActiveStatus(boolean activeStatus) { this.activeStatus = activeStatus; }
     public ComputerWhereabout getComputerWhereabout() { return computerWhereabout; }

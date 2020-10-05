@@ -3,7 +3,7 @@ package se.lexicon.computer_cms_project.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
-
+@Entity
 public class Person {
     //Fields
     @Id
@@ -11,7 +11,11 @@ public class Person {
     private int personId;
     private String firstName;
     private String lastName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "locationInformation_id")
     private LocationInformation locationInformation;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contactInformation_id")
     private ContactInformation contactInformation;
     private Boolean active;
 
