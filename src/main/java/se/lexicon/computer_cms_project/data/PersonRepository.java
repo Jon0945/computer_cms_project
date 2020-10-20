@@ -1,11 +1,11 @@
-package se.lexicon.computer_cms_project.data_access;
+package se.lexicon.computer_cms_project.data;
 
 import org.springframework.data.repository.CrudRepository;
 import se.lexicon.computer_cms_project.entity.Person;
 
 import java.util.List;
 
-public interface PersonDAO extends CrudRepository<Person, Integer> {
+public interface PersonRepository extends CrudRepository<Person, Integer> {
     List<Person>findByFirstNameIgnoreCase(String firstname);
     List<Person>findByLastNameIgnoreCase(String lastname);
     List<Person>findByStreetNameLocationInformationStreetNameIgnoreCase(String streetName);
@@ -14,4 +14,5 @@ public interface PersonDAO extends CrudRepository<Person, Integer> {
     List<Person>findByCountryLocationInformationCountryNameIgnoreCase(String countryName);
     List<Person>findByEmailContactInformationEmailIgnoreCase(String email);
     List<Person>findByPhoneNrContractInformationPhoneNrIgnoreCase(String phoneNr);
+    List<Person>findByActive(boolean active);
 }
