@@ -8,7 +8,7 @@ import java.util.Optional;
 
 //TODO -- Move too verbose commands to service layer
 public interface CompanyRepository extends CrudRepository<Company, Integer> {
-    List<Company> findByCompanyNameIgnoreCase(String companyName);
+    List<Company> findByCompanyNameContainingIgnoreCase(String companyName);
     List<Company>findByStreetNameLocationInformationStreetNameIgnoreCase(String streetName);
     List<Company>findByPostalCodeLocationInformationPostalCodeIgnoreCase(String postalCode);
     List<Company>findByCityLocationInformationCityNameIgnoreCase(String cityName);

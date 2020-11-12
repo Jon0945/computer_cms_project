@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-    private CompanyRepository userRepo;
+    private CompanyRepository companyRepo;
     private DtoConversionService conversionService;
 
     @Autowired
-    public void setUserRepo(CompanyRepository userRepo) { this.userRepo = userRepo; }
+    public void setCompanyRepo(CompanyRepository companyRepo) { this.companyRepo = companyRepo; }
 
     @Autowired
     public void setConversionService(DtoConversionService conversionService) {
@@ -32,7 +32,7 @@ public class CompanyServiceImpl implements CompanyService {
             throw new IllegalArgumentException("Company had invalid ID: " + newCompanyDto.getCompanyId());
         }
         Company newCompany = conversionService.dtoToCompany(newCompanyDto);
-        newCompany = userRepo.save(newCompany);
+        newCompany = companyRepo.save(newCompany);
         return conversionService.companyToDto(newCompany);
     }
 
@@ -41,7 +41,7 @@ public class CompanyServiceImpl implements CompanyService {
         if(companyDto.getCompanyId() == 0){
             throw new IllegalArgumentException("Company had invalid ID: " + companyDto.getCompanyId());
         }
-        Company company = userRepo.findById(companyDto.getCompanyId()).orElseThrow(Exceptions
+        Company company = companyRepo.findById(companyDto.getCompanyId()).orElseThrow(Exceptions
                 .entityNotFoundException("Requested Company could not be found"));
         company.setActive(companyDto.isCompanyActive());
         company.setContactInformation(
@@ -51,13 +51,21 @@ public class CompanyServiceImpl implements CompanyService {
                 conversionService.dtoToLocationInformation(companyDto.getLocationInformation())
         );
         company.setCompanyName(companyDto.getCompanyName());
-        userRepo.save(company);
+        companyRepo.save(company);
         return  companyDto;
     }
 
     @Override
+    public List<CompanyDto> findByCompanyName(String companyName) {
+        List<Company> companyList = companyRepo.findByCompanyNameContainingIgnoreCase(companyName);
+        List<CompanyDto> dtoList = new ArrayList<>();
+        companyList.forEach(company -> dtoList.add(conversionService.companyToDto(company)));
+        return dtoList;
+    }
+
+    @Override
     public CompanyDto findByEmail(String email) {
-        Optional<Company> companyOptional = userRepo.findByEmailContactInformationEmailIgnoreCase(email.trim());
+        Optional<Company> companyOptional = companyRepo.findByEmailContactInformationEmailIgnoreCase(email.trim());
         CompanyDto dto = conversionService.companyToDto(companyOptional.orElseThrow(Exceptions
                 .entityNotFoundException("Requested Company with email "+ email.trim() + " could not be found")));
         return dto;
@@ -65,7 +73,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDto findByPhoneNr(String phoneNr) {
-        Optional<Company> companyOptional = userRepo.findByPhoneNrContractInformationPhoneNrIgnoreCase(phoneNr.trim());
+        Optional<Company> companyOptional = companyRepo.findByPhoneNrContractInformationPhoneNrIgnoreCase(phoneNr.trim());
         CompanyDto dto = conversionService.companyToDto(companyOptional.orElseThrow((Exceptions
                 .entityNotFoundException("Requested Company with phoneNr "+ phoneNr.trim() + " could not be found"))));
         return dto;
@@ -73,7 +81,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDto findById(int companyId) {
-        Optional<Company> optionalCompany = userRepo.findById(companyId);
+        Optional<Company> optionalCompany = companyRepo.findById(companyId);
         Company company = optionalCompany.orElseThrow(Exceptions
                 .entityNotFoundException("Requested Company could not be found"));
         return conversionService.companyToDto(company);
@@ -82,7 +90,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional(readOnly = true)
     public List<CompanyDto> findByCountryName(String countryName) {
-        List<Company> companies = userRepo.findByCountryLocationInformationCountryNameIgnoreCase(countryName);
+        List<Company> companies = companyRepo.findByCountryLocationInformationCountryNameIgnoreCase(countryName);
         List<CompanyDto> companyDtos = new ArrayList<>();
         for(Company company : companies) {
             companyDtos.add(conversionService.companyToDto(company));
@@ -93,7 +101,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional(readOnly = true)
     public List<CompanyDto> findByCityName(String cityName) {
-        List<Company> companies = userRepo.findByCityLocationInformationCityNameIgnoreCase(cityName);
+        List<Company> companies = companyRepo.findByCityLocationInformationCityNameIgnoreCase(cityName);
         List<CompanyDto> companyDtos = new ArrayList<>();
         for(Company company : companies) {
             companyDtos.add(conversionService.companyToDto(company));
@@ -104,7 +112,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional(readOnly = true)
     public List<CompanyDto> findByPostalCode(String postalCode) {
-        List<Company> companies = userRepo.findByPostalCodeLocationInformationPostalCodeIgnoreCase(postalCode);
+        List<Company> companies = companyRepo.findByPostalCodeLocationInformationPostalCodeIgnoreCase(postalCode);
         List<CompanyDto> companyDtos = new ArrayList<>();
         for(Company company : companies) {
             companyDtos.add(conversionService.companyToDto(company));
@@ -115,7 +123,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional(readOnly = true)
     public List<CompanyDto> findByStreetName(String streetName) {
-        List<Company> companies = userRepo.findByStreetNameLocationInformationStreetNameIgnoreCase(streetName);
+        List<Company> companies = companyRepo.findByStreetNameLocationInformationStreetNameIgnoreCase(streetName);
         List<CompanyDto> companyDtos = new ArrayList<>();
         for(Company company : companies) {
             companyDtos.add(conversionService.companyToDto(company));
@@ -125,7 +133,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<CompanyDto> findAllByActiveStatus(boolean activeStatus) {
-        List<Company> companies = userRepo.findByActive(activeStatus);
+        List<Company> companies = companyRepo.findByActive(activeStatus);
         return  companies.stream()
                 .map(company -> conversionService.companyToDto(company))
                 .collect(Collectors.toList());

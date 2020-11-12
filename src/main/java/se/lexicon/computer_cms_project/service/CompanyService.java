@@ -7,6 +7,7 @@ import java.util.List;
 public interface CompanyService {
     CompanyDto createNewCompany(CompanyDto newCompanyDto);
     CompanyDto updateCompany(CompanyDto companyDto);
+    List<CompanyDto> findByCompanyName(String companyName);
     CompanyDto findByEmail (String email);
     CompanyDto findByPhoneNr (String phoneNr);
     CompanyDto findById(int companyId);
