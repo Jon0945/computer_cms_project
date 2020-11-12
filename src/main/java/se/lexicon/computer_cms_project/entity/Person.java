@@ -17,7 +17,7 @@ public class Person {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contactInformation_id")
     private ContactInformation contactInformation;
-    private Boolean active;
+    private boolean active;
 
     //Constructor 1
     public Person(int personId, String firstName, String lastName, LocationInformation locationInformation, ContactInformation contactInformation, Boolean active) {
@@ -47,21 +47,22 @@ public class Person {
     public void setLocationInformation(LocationInformation locationInformation) { this.locationInformation = locationInformation; }
     public ContactInformation getContactInformation() { return contactInformation; }
     public void setContactInformation(ContactInformation contactInformation) { this.contactInformation = contactInformation; }
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
-
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
     //Equals & Hashcode Override
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
         return personId == person.personId &&
+                active == person.active &&
                 firstName.equals(person.firstName) &&
                 lastName.equals(person.lastName) &&
                 locationInformation.equals(person.locationInformation) &&
-                contactInformation.equals(person.contactInformation) &&
-                active.equals(person.active);
+                contactInformation.equals(person.contactInformation);
     }
 
     @Override

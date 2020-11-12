@@ -17,7 +17,7 @@ public class Company {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contactInformation_id")
     private ContactInformation contactInformation;
-    private Boolean active;
+    private boolean active;
 
     //Constructor 1
     public Company(int companyId, String companyName, LocationInformation locationInformation,
@@ -47,24 +47,25 @@ public class Company {
     public void setLocationInformation(LocationInformation locationInformation) { this.locationInformation = locationInformation; }
     public ContactInformation getContactInformation() { return contactInformation; }
     public void setContactInformation(ContactInformation contactInformation) { this.contactInformation = contactInformation; }
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 
     //Equals & Hashcode Override
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Company)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Company company = (Company) o;
-        return getId() == company.getId() &&
-                getCompanyName().equals(company.getCompanyName()) &&
-                getLocationInformation().equals(company.getLocationInformation()) &&
-                getContactInformation().equals(company.getContactInformation()) &&
-                getActive().equals(company.getActive());
+        return companyId == company.companyId &&
+                active == company.active &&
+                companyName.equals(company.companyName) &&
+                locationInformation.equals(company.locationInformation) &&
+                contactInformation.equals(company.contactInformation);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCompanyName(), getLocationInformation(), getContactInformation(), getActive());
+        return Objects.hash(companyId, companyName, locationInformation, contactInformation, active);
     }
 
     //toString Override

@@ -1,24 +1,22 @@
 package se.lexicon.computer_cms_project.dto;
 
 public class CompanyDto {
-
-    public class CompanyDTO {
-        private int companyId;
+    private int companyId;
         private String companyName;
-        private LocationInformationDto companyLocationInformation;
-        private ContactInformationDto companyContactInformation;
+        private LocationInformationDto locationInformation;
+        private ContactInformationDto contactInformation;
         private boolean companyActive;
 
-        public CompanyDTO(int companyId, String companyName, LocationInformationDto companyLocationInformation,
-                          ContactInformationDto companyContactInformation, boolean companyActive) {
+        public CompanyDto(int companyId, String companyName, LocationInformationDto locationInformation,
+                          ContactInformationDto contactInformation, boolean companyActive) {
             this.setCompanyId(companyId);
             this.setCompanyName(companyName);
-            this.setCompanyLocationInformation(companyLocationInformation);
-            this.setCompanyContactInformation(companyContactInformation);
+            this.setLocationInformation(locationInformation);
+            this.setContactInformation(contactInformation);
             this.setCompanyActive(companyActive);
         }
 
-        public CompanyDTO() {
+        public CompanyDto() {
         } //Needed by Hibernate
 
         public int getCompanyId() {
@@ -37,20 +35,20 @@ public class CompanyDto {
             this.companyName = companyName;
         }
 
-        public LocationInformationDto getCompanyLocationInformation() {
-            return companyLocationInformation;
+        public LocationInformationDto getLocationInformation() {
+            return locationInformation;
         }
 
-        public void setCompanyLocationInformation(LocationInformationDto companyLocationInformation) {
-            this.companyLocationInformation = companyLocationInformation;
+        public void setLocationInformation(LocationInformationDto companyLocationInformation) {
+            this.locationInformation = companyLocationInformation;
         }
 
-        public ContactInformationDto getCompanyContactInformation() {
-            return companyContactInformation;
+        public ContactInformationDto getContactInformation() {
+            return contactInformation;
         }
 
-        public void setCompanyContactInformation(ContactInformationDto companyContactInformation) {
-            this.companyContactInformation = companyContactInformation;
+        public void setContactInformation(ContactInformationDto companyContactInformation) {
+            this.contactInformation = companyContactInformation;
         }
 
         public boolean isCompanyActive() {
@@ -61,4 +59,4 @@ public class CompanyDto {
             this.companyActive = companyActive;
         }
     }
-}
+

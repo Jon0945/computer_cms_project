@@ -21,12 +21,12 @@ public interface ComputerRepository extends CrudRepository<Computer, Integer> {
     List<Computer> findBySupportNoteNoteNoteFreeTextContaining(String supportNoteFreeText);
     List<Computer> findByOtherNoteNoteNoteTitle(String otherNoteTitle);
     List<Computer> findByOtherNoteNoteNoteFreeTextContaining(String otherNoteFreeText);
-    List<Computer>findByActive(boolean active);
+    List<Computer> findByActive(boolean active);
     //TODO List<Computer> findByStreetNameComputerWhereAboutLocationInformationStreetNameIgnoreCase(String streetName);
     //TODO List<Computer>findByPostalCodeComputerWhereAboutLocationInformationPostalCodeIgnoreCase(String postalCode);
     //TODO List<Computer>findByCityComputerWhereAboutLocationInformationCityNameIgnoreCase(String cityName);
     //TODO List<Computer>findByCountryComputerWhereAboutLocationInformationCountryNameIgnoreCase(String countryName);
     //TODO List<Computer>findByEmailComputerWhereAboutContactInformationEmailIgnoreCase(String email);
     //TODO List<Computer>findByPhoneNrComputerWhereAboutContractInformationPhoneNrIgnoreCase(String phoneNr);
-    List<Computer>findByComputerWhereAboutDateTimeBetween(LocalDate start, LocalDate end);
+    List<Computer> findByComputerWhereAboutDateTimeBetween(LocalDate start, LocalDate end);
 }
