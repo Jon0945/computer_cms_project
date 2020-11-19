@@ -24,7 +24,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
     public void setConversionService(DtoConversionService conversionService) {
-        this.conversionService = conversionService; }
+        this.conversionService = conversionService;
+    }
 
     @Override
     public CompanyDto createNewCompany(CompanyDto newCompanyDto) throws  IllegalArgumentException {

@@ -6,7 +6,7 @@ public class PersonDto {
     private String personLastName;
     private LocationInformationDto personLocationInformation;
     private ContactInformationDto personContactInformation;
-    private boolean personaActive;
+    private boolean personActive;
 
     public PersonDto(int personId, String personFirstName, String personLastName,
                      LocationInformationDto personLocationInformation, ContactInformationDto personContactInformation, boolean active) {
@@ -15,7 +15,7 @@ public class PersonDto {
         this.setPersonLastName(personLastName);
         this.setPersonLocationInformation(personLocationInformation);
         this.setPersonContactInformation(personContactInformation);
-        this.setPersonaActive(active);
+        this.setPersonActive(active);
     }
 
     public PersonDto() {}
@@ -60,12 +60,12 @@ public class PersonDto {
         this.personContactInformation = personContactInformation;
     }
 
-    public boolean isPersonaActive() {
-        return personaActive;
+    public boolean isPersonActive() {
+        return personActive;
     }
 
-    public void setPersonaActive(boolean personaActive) {
-        this.personaActive = personaActive;
+    public void setPersonActive(boolean personActive) {
+        this.personActive = personActive;
     }
 }
 

@@ -196,7 +196,7 @@ public class DtoConversionServiceImpl implements DtoConversionService {
                 dto.getPersonLastName(),
                 dtoToLocationInformation(dto.getPersonLocationInformation()),
                 dtoToContactInformation(dto.getPersonContactInformation()),
-                dto.isPersonaActive());
+                dto.isPersonActive());
     }
 
     @Override

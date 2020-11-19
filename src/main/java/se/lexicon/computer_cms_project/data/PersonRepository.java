@@ -4,15 +4,16 @@ import org.springframework.data.repository.CrudRepository;
 import se.lexicon.computer_cms_project.entity.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonRepository extends CrudRepository<Person, Integer> {
-    List<Person>findByFirstNameIgnoreCase(String firstname);
-    List<Person>findByLastNameIgnoreCase(String lastname);
+    List<Person>findByFirstNameContainingIgnoreCase(String firstname);
+    List<Person>findByLastNameContainingIgnoreCase(String lastname);
     List<Person>findByStreetNameLocationInformationStreetNameIgnoreCase(String streetName);
     List<Person>findByPostalCodeLocationInformationPostalCodeIgnoreCase(String postalCode);
     List<Person>findByCityLocationInformationCityNameIgnoreCase(String cityName);
     List<Person>findByCountryLocationInformationCountryNameIgnoreCase(String countryName);
-    List<Person>findByEmailContactInformationEmailIgnoreCase(String email);
-    List<Person>findByPhoneNrContractInformationPhoneNrIgnoreCase(String phoneNr);
+    Optional<Person>findByEmailContactInformationEmailIgnoreCase(String email);
+    Optional<Person> findByPhoneNrContractInformationPhoneNrIgnoreCase(String phoneNr);
     List<Person>findByActive(boolean active);
 }
