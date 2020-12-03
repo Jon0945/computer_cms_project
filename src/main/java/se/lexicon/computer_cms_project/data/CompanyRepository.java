@@ -13,7 +13,7 @@ public interface CompanyRepository extends CrudRepository<Company, Integer> {
     List<Company>findByCityLocationInformationCityNameIgnoreCase(String cityName);
     List<Company>findByCountryLocationInformationCountryNameIgnoreCase(String countryName);
     Optional<Company>findByEmailContactInformationEmailIgnoreCase(String email);
-    Optional<Company>findByPhoneNrContractInformationPhoneNrIgnoreCase(String phoneNr);
+    Optional<Company> findByPhoneNrContactInformationPhoneNrIgnoreCase(String phoneNr);
     List<Company>findByActive(boolean active);
 
 }

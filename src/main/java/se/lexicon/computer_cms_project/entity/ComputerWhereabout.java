@@ -10,10 +10,16 @@ public class ComputerWhereabout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int computerWhereAboutId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH})
     @JoinColumn(name = "locationInformation_id")
     private LocationInformation locationInformation;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH})
     @JoinColumn(name = "contactInformation_id")
     private ContactInformation contactInformation;
     private LocalDate startTime;

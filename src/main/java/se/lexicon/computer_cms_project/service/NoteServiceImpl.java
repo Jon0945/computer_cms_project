@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import se.lexicon.computer_cms_project.data.NoteRepository;
 import se.lexicon.computer_cms_project.dto.NoteDto;
 import se.lexicon.computer_cms_project.entity.Note;
+import se.lexicon.computer_cms_project.exception.EntityNotFoundException;
+import se.lexicon.computer_cms_project.exception.Exceptions;
 
 @Service
 public class NoteServiceImpl implements NoteService {
@@ -27,5 +29,18 @@ public class NoteServiceImpl implements NoteService {
         Note newNote = conversionService.dtoToNote(newNoteDto);
         newNote = noteRepo.save(newNote);
         return conversionService.noteToDto(newNote);
+    }
+
+    @Override
+    public NoteDto updateNote(NoteDto noteDto) throws IllegalArgumentException,EntityNotFoundException {
+        if(noteDto.getNoteId() == 0){
+            throw new IllegalArgumentException("Note had invalid ID: "+ noteDto.getNoteId());
+        }
+        Note note = noteRepo.findById(noteDto.getNoteId()).orElseThrow(Exceptions
+                .entityNotFoundException("Requested Note could not be found"));
+        note.setNoteFreeText(noteDto.getNoteFreeText());
+        note.setNoteTitle(noteDto.getNoteTitle());
+        noteRepo.save(note);
+        return noteDto;
     }
 }

@@ -19,7 +19,7 @@ class PersonTest {
     private ContactInformation testContactInformation;
     private String testEmail = "ture.test@gmail.com";
     private String testPhoneNr = "555 - TEST";
-    private Boolean testActiveStatus = true;
+    private boolean testActiveStatus = true;
 
     @BeforeEach
     public void createComputerWhereAbout() {
@@ -54,7 +54,7 @@ class PersonTest {
         assertEquals(expectedLastName, testPerson.getLastName());
         assertEquals(expectedLocationInformation, testPerson.getLocationInformation());
         assertEquals(expectedContactInformation, testPerson.getContactInformation());
-        assertEquals(expectedActiveStatus,testPerson.getActive());
+        assertEquals(expectedActiveStatus,testPerson.isActive());
     }
 
     @Test

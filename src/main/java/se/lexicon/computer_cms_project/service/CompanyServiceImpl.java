@@ -74,7 +74,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDto findByPhoneNr(String phoneNr) {
-        Optional<Company> companyOptional = companyRepo.findByPhoneNrContractInformationPhoneNrIgnoreCase(phoneNr.trim());
+        Optional<Company> companyOptional = companyRepo.findByPhoneNrContactInformationPhoneNrIgnoreCase(phoneNr.trim());
         CompanyDto dto = conversionService.companyToDto(companyOptional.orElseThrow((Exceptions
                 .entityNotFoundException("Requested Company with phoneNr "+ phoneNr.trim() + " could not be found"))));
         return dto;

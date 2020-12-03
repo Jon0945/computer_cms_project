@@ -18,7 +18,7 @@ public class CompanyTest {
     private ContactInformation testContactInformation;
     private String testEmail = "ture.test@gmail.com";
     private String testPhoneNr = "555 - TEST";
-    private Boolean testActiveStatus = true;
+    private boolean testActiveStatus = true;
 
     @BeforeEach
     public void createComputerWhereAbout() {
@@ -51,7 +51,7 @@ public class CompanyTest {
         assertEquals(expectedCompanyName, testCompany.getCompanyName());
         assertEquals(expectedLocationInformation, testCompany.getLocationInformation());
         assertEquals(expectedContactInformation, testCompany.getContactInformation());
-        assertEquals(expectedActiveStatus,testCompany.getActive());
+        assertEquals(expectedActiveStatus,testCompany.isActive());
     }
 
     @Test
@@ -75,6 +75,6 @@ public class CompanyTest {
         assertTrue(result.contains(testCompanyName));
         assertTrue(result.contains(String.valueOf(testCompany.getLocationInformation())));
         assertTrue(result.contains(String.valueOf(testCompany.getContactInformation())));
-        assertTrue(result.contains((String.valueOf(testCompany.getActive()))));
+        assertTrue(result.contains((String.valueOf(testCompany.isActive()))));
     }
 }

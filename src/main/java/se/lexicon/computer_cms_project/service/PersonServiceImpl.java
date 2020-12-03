@@ -84,7 +84,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDto findByPhoneNr(String phoneNr) {
-        Optional<Person> optionalPerson = personRepo.findByPhoneNrContractInformationPhoneNrIgnoreCase(phoneNr.trim());
+        Optional<Person> optionalPerson = personRepo.findByPhoneNrContactInformationPhoneNrIgnoreCase(phoneNr.trim());
         PersonDto dto = conversionService.personToDto(optionalPerson.orElseThrow(Exceptions
                 .entityNotFoundException("Requested Person with phoneNr "+ phoneNr.trim() + " could not be found")));
         return dto;

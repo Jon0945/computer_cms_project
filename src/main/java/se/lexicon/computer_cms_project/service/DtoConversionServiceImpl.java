@@ -22,10 +22,10 @@ public class DtoConversionServiceImpl implements DtoConversionService {
         this.companyRepository = companyRepository;
     }
 
-    //FIXME @Autowired
-    //FIXME public void setComputerRepository(ComputerRepository computerRepository) {
-    //FIXME    this.computerRepository = computerRepository;
-    //FIXME }
+    @Autowired
+    public void setComputerRepository(ComputerRepository computerRepository) {
+        this.computerRepository = computerRepository;
+    }
 
     @Autowired
     public void setComputerWhereaboutRepository(ComputerWhereaboutRepository computerWhereaboutRepository) {

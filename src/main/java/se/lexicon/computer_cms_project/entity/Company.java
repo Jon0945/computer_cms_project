@@ -11,10 +11,20 @@ public class Company {
     private int companyId;
     @Column(unique = true)
     private String companyName;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(
+            fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH}
+            )
     @JoinColumn(name = "locationInformation_id")
     private LocationInformation locationInformation;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(
+            fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH}
+            )
     @JoinColumn(name = "contactInformation_id")
     private ContactInformation contactInformation;
     private boolean active;

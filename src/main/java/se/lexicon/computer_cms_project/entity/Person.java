@@ -11,10 +11,16 @@ public class Person {
     private int personId;
     private String firstName;
     private String lastName;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH})
     @JoinColumn(name = "locationInformation_id")
     private LocationInformation locationInformation;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH})
     @JoinColumn(name = "contactInformation_id")
     private ContactInformation contactInformation;
     private boolean active;

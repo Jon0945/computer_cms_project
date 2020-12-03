@@ -26,7 +26,10 @@ public class Computer {
     @JoinColumn(name = "othernote_id")
     private Note otherNotes;
     private boolean activeStatus;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH})
     @JoinColumn(name = "computerwhereabout_id")
     private ComputerWhereabout computerWhereabout;
 

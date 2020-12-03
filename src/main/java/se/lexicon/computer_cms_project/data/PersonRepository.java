@@ -14,6 +14,6 @@ public interface PersonRepository extends CrudRepository<Person, Integer> {
     List<Person>findByCityLocationInformationCityNameIgnoreCase(String cityName);
     List<Person>findByCountryLocationInformationCountryNameIgnoreCase(String countryName);
     Optional<Person>findByEmailContactInformationEmailIgnoreCase(String email);
-    Optional<Person> findByPhoneNrContractInformationPhoneNrIgnoreCase(String phoneNr);
+    Optional<Person> findByPhoneNrContactInformationPhoneNrIgnoreCase(String phoneNr);
     List<Person>findByActive(boolean active);
 }
