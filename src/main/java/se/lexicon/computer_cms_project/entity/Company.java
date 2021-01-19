@@ -9,7 +9,6 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int companyId;
-    @Column(unique = true)
     private String companyName;
     @ManyToOne(
             fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,

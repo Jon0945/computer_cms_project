@@ -47,7 +47,7 @@ public class ComputerServiceImpl implements ComputerService {
         }
         Computer computer = computerRepo.findById(computerDto.getComputerId()).orElseThrow(Exceptions
                 .entityNotFoundException("Requested Computer could not be found"));
-        computer.setComputerWhereabout(conversionService.dtoToComputerWhereAbout(computerDto.getComputerWhereabout()));
+        computer.setComputerWhereAbout(conversionService.dtoToComputerWhereAbout(computerDto.getComputerWhereabout()));
         computer.setActiveStatus(computerDto.isActiveStatus());
         computer.setOtherNotes(conversionService.dtoToNote(computerDto.getComputerOtherNotes()));
         computer.setSupportNote(conversionService.dtoToNote((computerDto.getComputerSupportNote())));
@@ -138,7 +138,7 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public List<ComputerDto> findAllByActiveStatus(boolean activeStatus) {
-        List<Computer> computers = computerRepo.findByActive(activeStatus);
+        List<Computer> computers = computerRepo.findByActiveStatus(activeStatus);
         return  computers.stream()
                 .map(computer -> conversionService.computerToDto(computer))
                 .collect(Collectors.toList());
@@ -146,7 +146,7 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public List<ComputerDto> findBySupportNoteTitle(String supportNoteTitle) {
-        List<Computer> computerList = computerRepo.findBySupportNoteNoteNoteTitle(supportNoteTitle);
+        List<Computer> computerList = computerRepo.findBySupportNoteNoteTitle(supportNoteTitle);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
@@ -154,7 +154,7 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public List<ComputerDto> findBySupportNoteFreeText(String supportNoteFreeText) {
-        List<Computer> computerList = computerRepo.findBySupportNoteNoteNoteFreeTextContaining(supportNoteFreeText);
+        List<Computer> computerList = computerRepo.findBySupportNoteNoteFreeTextContaining(supportNoteFreeText);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
@@ -162,7 +162,7 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public List<ComputerDto> findByOtherNoteTitle(String otherNoteTitle) {
-        List<Computer> computerList = computerRepo.findByOtherNoteNoteNoteTitle(otherNoteTitle);
+        List<Computer> computerList = computerRepo.findByOtherNotesNoteTitle(otherNoteTitle);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
@@ -170,7 +170,7 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public List<ComputerDto> findByOtherNoteFreeText(String otherNoteFreeText) {
-        List<Computer> computerList = computerRepo.findByOtherNoteNoteNoteFreeTextContaining(otherNoteFreeText);
+        List<Computer> computerList = computerRepo.findByOtherNotesNoteFreeTextContaining(otherNoteFreeText);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
@@ -180,7 +180,7 @@ public class ComputerServiceImpl implements ComputerService {
     @Transactional(readOnly = true)
     public List<ComputerDto> findByCountryName(String countryName) {
         List<Computer> computerList = computerRepo.
-                findByCountryComputerWhereAboutLocationInformationCountryNameIgnoreCase(countryName);
+                findByComputerWhereAboutLocationInformationCountryNameIgnoreCase(countryName);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
@@ -190,7 +190,7 @@ public class ComputerServiceImpl implements ComputerService {
     @Transactional(readOnly = true)
     public List<ComputerDto> findByCityName(String cityName) {
         List<Computer> computerList = computerRepo.
-                findByCityComputerWhereAboutLocationInformationCityNameIgnoreCase(cityName);
+                findByComputerWhereAboutLocationInformationCityNameIgnoreCase(cityName);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
@@ -200,7 +200,7 @@ public class ComputerServiceImpl implements ComputerService {
     @Transactional(readOnly = true)
     public List<ComputerDto> findByPostalCode(String postalCode) {
         List<Computer> computerList = computerRepo.
-                findByPostalCodeComputerWhereAboutLocationInformationPostalCodeIgnoreCase(postalCode);
+                findByComputerWhereAboutLocationInformationPostalCodeIgnoreCase(postalCode);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
@@ -210,7 +210,7 @@ public class ComputerServiceImpl implements ComputerService {
     @Transactional(readOnly = true)
     public List<ComputerDto> findByStreetName(String streetName) {
         List<Computer> computerList = computerRepo.
-                findByStreetNameComputerWhereAboutLocationInformationStreetNameIgnoreCase(streetName);
+                findByComputerWhereAboutLocationInformationStreetNameIgnoreCase(streetName);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
@@ -219,7 +219,7 @@ public class ComputerServiceImpl implements ComputerService {
     @Override
     public List<ComputerDto> findByEmail(String email) {
         List<Computer> computerList = computerRepo.
-                findByEmailComputerWhereAboutContactInformationEmailIgnoreCase(email);
+                findByComputerWhereAboutContactInformationEmailIgnoreCase(email);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
@@ -228,7 +228,7 @@ public class ComputerServiceImpl implements ComputerService {
     @Override
     public List<ComputerDto> findByPhoneNr(String phoneNr) {
         List<Computer> computerList = computerRepo.
-                findByPhoneNrComputerWhereAboutContactInformationPhoneNrIgnoreCase(phoneNr);
+                findByComputerWhereAboutContactInformationPhoneNrIgnoreCase(phoneNr);
         List<ComputerDto> dtoList = new ArrayList<>();
         computerList.forEach(computer -> dtoList.add(conversionService.computerToDto(computer)));
         return dtoList;
